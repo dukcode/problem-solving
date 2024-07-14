@@ -1,4 +1,4 @@
-package com.dukcode.algospot.chap06_brute_force;
+package com.dukcode.jongman.chap06_brute_force;
 
 import java.util.stream.Stream;
 import org.junit.jupiter.params.provider.Arguments;

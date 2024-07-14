@@ -1,4 +1,4 @@
-package com.dukcode.algospot.chap06_brute_force;
+package com.dukcode.jongman.chap06_brute_force;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
