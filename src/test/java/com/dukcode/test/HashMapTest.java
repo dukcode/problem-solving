@@ -29,7 +29,13 @@ public class HashMapTest {
 
     a.add(3);
     assertThat(map.get(a)).isEqualTo(null);
-    assertThat(map.get(b)).isEqualTo(null);
+    assertThat(map.get(a)).isEqualTo(null);
+
+    map.put(a, "b");
+    map.keySet().forEach((k) -> System.out.println(System.identityHashCode(k)));
+    for (var k : map.keySet()) {
+      System.out.println(map.get(k));
+    }
   }
 
 }
