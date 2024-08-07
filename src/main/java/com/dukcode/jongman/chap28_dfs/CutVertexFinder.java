@@ -85,11 +85,11 @@ public class CutVertexFinder {
       int to = Integer.parseInt(st.nextToken());
 
       adj[from].add(to);
+      adj[to].add(from);
     }
 
     discovered = new int[n];
     Arrays.fill(discovered, -1);
-    finished = new boolean[n];
   }
 
 }
