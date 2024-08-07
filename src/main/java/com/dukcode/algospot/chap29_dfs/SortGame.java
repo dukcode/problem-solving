@@ -20,74 +20,85 @@ public class SortGame {
   private static BufferedWriter bw;
   private static StringTokenizer st;
 
-  private static int n;
-  private static List<Integer> nums;
-
-  private static List<Integer> reverse(List<Integer> list, int st, int en) {
-    List<Integer> ret = new ArrayList<>(list);
-    while (st < --en) {
-      Collections.swap(ret, st++, en);
-    }
-
-    return ret;
-  }
+  private static Map<List<Integer>, Integer> toSort;
 
   public static void main(String[] args) throws IOException {
     br = new BufferedReader(new InputStreamReader(System.in));
     bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
+    toSort = new HashMap<>();
+    for (int len = 1; len <= 8; ++len) {
+      preCalc(len);
+    }
+
     int c = Integer.parseInt(br.readLine());
     while (c-- > 0) {
-      n = Integer.parseInt(br.readLine());
-
-      nums = new ArrayList<>();
+      int n = Integer.parseInt(br.readLine());
+      List<Integer> nums = new ArrayList<>();
       st = new StringTokenizer(br.readLine());
       for (int i = 0; i < n; ++i) {
         nums.add(Integer.parseInt(st.nextToken()));
       }
 
-      bw.write(String.valueOf(bfs()));
+      nums = compressNums(nums);
+      bw.write(String.valueOf(toSort.get(nums)));
       bw.newLine();
-
     }
 
     br.close();
     bw.close();
   }
 
-  private static int bfs() {
-    List<Integer> sortedNums = new ArrayList<>(nums);
-    Collections.sort(sortedNums);
+  private static List<Integer> compressNums(List<Integer> nums) {
 
-    Map<List<Integer>, Integer> dist = new HashMap<>();
+    List<Integer> ret = new ArrayList<>();
+    for (int ref : nums) {
+      int cnt = 0;
+      for (Integer num : nums) {
+        if (ref >= num) {
+          cnt++;
+        }
+      }
+      ret.add(cnt);
+    }
+
+    return ret;
+  }
+
+  private static void preCalc(int len) {
+    List<Integer> arr = new ArrayList<>();
+    for (int i = 1; i <= len; ++i) {
+      arr.add(i);
+    }
+
     Queue<List<Integer>> q = new LinkedList<>();
-
-    dist.put(nums, 0);
-    q.offer(new ArrayList<>(nums));
+    q.offer(arr);
+    toSort.put(arr, 0);
 
     while (!q.isEmpty()) {
       List<Integer> here = q.poll();
-      int distNow = dist.get(here);
-
-      if (here.equals(sortedNums)) {
-        return dist.get(here);
-      }
-
-      for (int st = 0; st < n - 2; ++st) {
-        for (int en = st + 2; en <= n; ++en) {
+      int cnt = toSort.get(here);
+      for (int st = 0; st <= len - 2; ++st) {
+        for (int en = st + 2; en <= len; ++en) {
           List<Integer> there = reverse(here, st, en);
-
-          if (dist.containsKey(there)) {
+          if (toSort.containsKey(there)) {
             continue;
           }
-
+          toSort.put(there, cnt + 1);
           q.offer(there);
-          dist.put(there, distNow + 1);
         }
       }
     }
 
-    return -1;
   }
 
+  private static List<Integer> reverse(List<Integer> arr, int st, int en) {
+    List<Integer> ret = new ArrayList<>(arr);
+
+    while (st < --en) {
+      Collections.swap(ret, st++, en);
+    }
+
+    return ret;
+  }
 }

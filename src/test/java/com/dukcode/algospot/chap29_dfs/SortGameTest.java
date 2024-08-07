@@ -20,7 +20,7 @@ class SortGameTest extends ProblemSolvingTest {
                 4
                 3 4 1 2
                 3
-                1 2 3
+                10 20 30
                 """,
             """
                 1
