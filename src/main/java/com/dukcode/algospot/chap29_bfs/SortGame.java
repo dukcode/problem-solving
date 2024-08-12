@@ -1,4 +1,4 @@
-package com.dukcode.algospot.chap29_dfs;
+package com.dukcode.algospot.chap29_bfs;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

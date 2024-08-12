@@ -1,4 +1,4 @@
-package com.dukcode.algospot.chap29_dfs;
+package com.dukcode.algospot.chap29_bfs;
 
 import java.util.stream.Stream;
 import org.junit.jupiter.params.provider.Arguments;
