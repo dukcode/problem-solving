@@ -1,4 +1,4 @@
-package com.dukcode.baekjoon.dajikstra;
+package com.dukcode.baekjoon.daijkstra;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -15,6 +15,7 @@ import java.util.PriorityQueue;
 import java.util.StringTokenizer;
 
 public class B11779 {
+
   private static final long MX = Long.MAX_VALUE / 2;
 
   private static BufferedReader br;

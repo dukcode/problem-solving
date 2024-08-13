@@ -1,4 +1,4 @@
-package com.dukcode.baekjoon.dajikstra;
+package com.dukcode.baekjoon.daijkstra;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

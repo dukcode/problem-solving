@@ -1,6 +1,4 @@
-package com.dukcode.baekjoon.dajikstra;
-
-import static org.junit.jupiter.api.Assertions.*;
+package com.dukcode.baekjoon.daijkstra;
 
 import java.util.stream.Stream;
 import org.junit.jupiter.params.provider.Arguments;
