@@ -33,23 +33,12 @@ public class B3151 {
     Arrays.sort(arr);
 
     long cnt = 0;
-    for (int first = 0; first < n; first++) {
-      for (int second = first + 1; second < n; second++) {
-        int counter = -arr[first] - arr[second];
-        int st = Arrays.binarySearch(arr, second + 1, n, counter);
+    for (int i = 0; i < n; i++) {
+      for (int j = i + 1; j < n; j++) {
+        int target = -arr[i] - arr[j];
 
-        if (st < 0) {
-          continue;
-        }
-
-        int en = st;
-        while (en < n && arr[en] == counter) {
-          en++;
-        }
-
-        while (st > second + 1 && arr[st - 1] == counter) {
-          st--;
-        }
+        int st = lowerBound(arr, target, j + 1, n);
+        int en = upperBound(arr, target, j + 1, n);
 
         cnt += en - st;
       }
@@ -59,6 +48,36 @@ public class B3151 {
 
     br.close();
     bw.close();
+  }
+
+  private static int lowerBound(int[] arr, int target, int st, int en) {
+    while (st < en) {
+      int half = (st + en) / 2;
+
+      if (arr[half] < target) {
+        st = half + 1;
+      } else {
+        en = half;
+      }
+
+    }
+
+    return st;
+  }
+
+  private static int upperBound(int[] arr, int target, int st, int en) {
+    while (st < en) {
+      int half = (st + en) / 2;
+
+      if (arr[half] <= target) {
+        st = half + 1;
+      } else {
+        en = half;
+      }
+
+    }
+
+    return st;
   }
 
 
