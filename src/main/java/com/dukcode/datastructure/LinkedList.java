@@ -3,7 +3,7 @@ package com.dukcode.datastructure;
 import java.util.NoSuchElementException;
 import java.util.StringJoiner;
 
-public class LinkedList<E> {
+class LinkedList<E> {
 
   private Node<E> head;
   private Node<E> tail;
