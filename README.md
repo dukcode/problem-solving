@@ -10,3 +10,8 @@
 - [동전 거슬러주기](https://www.codetree.ai/missions/2/problems/coin-change/description)
 - [최대 동전 거슬러주기](https://www.codetree.ai/missions/2/problems/max-coin-change/description)
     - `INIT`값이랑 `IMPOSSIBLE`값이랑 잘 구분하기
+- [최대 합 분할](https://www.codetree.ai/missions/2/problems/maximum-sum-partition/description)
+    - `cache[idx][abs(diff)]`로 잡으면 다음에 대응하지 못함. 상태를 정확히 나타낼 수 있는 걸 찾아야함
+    - `2 3 1 1 3 1`
+    - `C C C A A A -> A=5, B=0 -> 불가능 처리`
+    - `A A         -> A=5, B=0 -> 불가능이라고 처리됨`
