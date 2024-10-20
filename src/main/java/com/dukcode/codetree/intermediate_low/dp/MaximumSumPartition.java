@@ -37,7 +37,8 @@ public class MaximumSumPartition {
       total += arr[i];
     }
 
-    cache = new int[total + 1][total + 1][n];
+    cache = new int[total + 1][total
+        + 1][n];  // 100_000 * 100_000 * 100 = 1_000_000_000_000 = 4_000_000MB = 4TB
     for (int a = 0; a <= total; a++) {
       for (int b = 0; b <= total; b++) {
         Arrays.fill(cache[a][b], UNUSED);
