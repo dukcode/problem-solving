@@ -17,3 +17,5 @@
     - `A A         -> A=5, B=0 -> 불가능이라고 처리됨`
 - [숫자 전쟁](https://www.codetree.ai/missions/2/problems/number-war/description)
     - 현재의 정보를 이용하면 올라가야함.
+- [올바른 등식 만들기](https://www.codetree.ai/missions/2/problems/right-equality/description)
+    - 베이스 케이스 처리 중요
