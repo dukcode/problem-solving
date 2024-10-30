@@ -1,4 +1,4 @@
-package com.dukcode.codetree.intermediate_high.mst;
+package com.dukcode.codetree.intermediate_high.mst.disjoint_set;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -9,7 +9,10 @@ import java.util.Arrays;
 import java.util.StringTokenizer;
 import java.util.stream.IntStream;
 
-public class MinimumEdgeSize {
+public class ElementsOfASet {
+
+  private static final int UNION = 0;
+  private static final int IN_SAME_SET = 1;
 
   private static BufferedReader br;
   private static BufferedWriter bw;
@@ -17,11 +20,6 @@ public class MinimumEdgeSize {
 
   private static int n;
   private static int m;
-
-  private static int a;
-  private static int b;
-
-  private static Edge[] edges;
 
   private static int[] parent;
   private static int[] height;
@@ -34,41 +32,30 @@ public class MinimumEdgeSize {
     n = Integer.parseInt(st.nextToken());
     m = Integer.parseInt(st.nextToken());
 
-    st = new StringTokenizer(br.readLine());
-    a = Integer.parseInt(st.nextToken()) - 1;
-    b = Integer.parseInt(st.nextToken()) - 1;
-
-    edges = new Edge[m];
-
     parent = IntStream.range(0, n).toArray();
     height = new int[n];
+    Arrays.fill(height, 1);
 
     for (int i = 0; i < m; i++) {
       st = new StringTokenizer(br.readLine());
-      int fr = Integer.parseInt(st.nextToken()) - 1;
-      int to = Integer.parseInt(st.nextToken()) - 1;
-      int dist = Integer.parseInt(st.nextToken());
+      int command = Integer.parseInt(st.nextToken());
+      int a = Integer.parseInt(st.nextToken()) - 1;
+      int b = Integer.parseInt(st.nextToken()) - 1;
 
-      edges[i] = new Edge(fr, to, dist);
-    }
-
-    Arrays.sort(edges, (e1, e2) -> Integer.compare(e2.dist, e1.dist));
-
-    int ans = -1;
-    for (int i = 0; i < m; i++) {
-      Edge e = edges[i];
-      union(e.fr, e.to);
-
-      if (findRoot(a) == findRoot(b)) {
-        ans = e.dist;
-        break;
+      if (command == UNION) {
+        union(a, b);
+        continue;
+      } else {
+        bw.write(String.valueOf(areInSameSet(a, b) ? 1 : 0));
+        bw.newLine();
       }
-    }
 
-    bw.write(String.valueOf(ans));
+
+    }
 
     br.close();
     bw.close();
+
   }
 
   private static void union(int a, int b) {
@@ -79,11 +66,11 @@ public class MinimumEdgeSize {
       return;
     }
 
-    if (height[rootA] > height[rootB]) {
-      parent[rootB] = rootA;
-      return;
-    } else if (height[rootA] < height[rootB]) {
+    if (height[rootA] < height[rootB]) {
       parent[rootA] = rootB;
+      return;
+    } else if (height[rootA] > height[rootB]) {
+      parent[rootB] = rootA;
       return;
     }
 
@@ -96,19 +83,14 @@ public class MinimumEdgeSize {
       return x;
     }
 
-    return parent[x] = findRoot(parent[x]);
+    int root = findRoot(parent[x]);
+    parent[x] = root;
+
+    return root;
   }
 
-  private static class Edge {
-
-    int fr;
-    int to;
-    int dist;
-
-    public Edge(int fr, int to, int dist) {
-      this.fr = fr;
-      this.to = to;
-      this.dist = dist;
-    }
+  private static boolean areInSameSet(int a, int b) {
+    return findRoot(a) == findRoot(b);
   }
+
 }

@@ -1,4 +1,4 @@
-package com.dukcode.codetree.intermediate_high.mst;
+package com.dukcode.codetree.intermediate_high.mst.disjoint_set;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

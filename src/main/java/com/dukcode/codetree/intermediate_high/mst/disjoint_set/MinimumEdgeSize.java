@@ -1,18 +1,15 @@
-package com.dukcode.codetree.intermediate_high.mst;
+package com.dukcode.codetree.intermediate_high.mst.disjoint_set;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 import java.util.StringTokenizer;
 import java.util.stream.IntStream;
 
-public class DoNotConnectWithASpecificNode {
+public class MinimumEdgeSize {
 
   private static BufferedReader br;
   private static BufferedWriter bw;
@@ -23,11 +20,11 @@ public class DoNotConnectWithASpecificNode {
 
   private static int a;
   private static int b;
-  private static int k;
+
+  private static Edge[] edges;
 
   private static int[] parent;
   private static int[] height;
-  private static int[] size;
 
   public static void main(String[] args) throws IOException {
     br = new BufferedReader(new InputStreamReader(System.in));
@@ -37,49 +34,35 @@ public class DoNotConnectWithASpecificNode {
     n = Integer.parseInt(st.nextToken());
     m = Integer.parseInt(st.nextToken());
 
-    parent = IntStream.range(0, n).toArray();
-    height = new int[n];
-    Arrays.fill(height, 1);
-    size = new int[n];
-    Arrays.fill(size, 1);
-
-    for (int i = 0; i < m; ++i) {
-      st = new StringTokenizer(br.readLine());
-      int a = Integer.parseInt(st.nextToken()) - 1;
-      int b = Integer.parseInt(st.nextToken()) - 1;
-
-      union(a, b);
-    }
-
     st = new StringTokenizer(br.readLine());
     a = Integer.parseInt(st.nextToken()) - 1;
     b = Integer.parseInt(st.nextToken()) - 1;
-    k = Integer.parseInt(st.nextToken());
 
-    int rootA = findRoot(a);
-    int rootB = findRoot(b);
+    edges = new Edge[m];
 
-    List<Integer> sizes = new ArrayList<>();
-    boolean[] vis = new boolean[n];
-    for (int i = 0; i < n; ++i) {
-      int rootI = findRoot(i);
+    parent = IntStream.range(0, n).toArray();
+    height = new int[n];
 
-      if (rootI == rootA || rootI == rootB) {
-        continue;
-      }
+    for (int i = 0; i < m; i++) {
+      st = new StringTokenizer(br.readLine());
+      int fr = Integer.parseInt(st.nextToken()) - 1;
+      int to = Integer.parseInt(st.nextToken()) - 1;
+      int dist = Integer.parseInt(st.nextToken());
 
-      if (vis[rootI]) {
-        continue;
-      }
-
-      sizes.add(size[rootI]);
-      vis[rootI] = true;
+      edges[i] = new Edge(fr, to, dist);
     }
 
-    sizes.sort(Collections.reverseOrder());
-    int ans = size[rootA];
-    for (int i = 0; i < Math.min(k, sizes.size()); ++i) {
-      ans += sizes.get(i);
+    Arrays.sort(edges, (e1, e2) -> Integer.compare(e2.dist, e1.dist));
+
+    int ans = -1;
+    for (int i = 0; i < m; i++) {
+      Edge e = edges[i];
+      union(e.fr, e.to);
+
+      if (findRoot(a) == findRoot(b)) {
+        ans = e.dist;
+        break;
+      }
     }
 
     bw.write(String.valueOf(ans));
@@ -98,16 +81,13 @@ public class DoNotConnectWithASpecificNode {
 
     if (height[rootA] > height[rootB]) {
       parent[rootB] = rootA;
-      size[rootA] += size[rootB];
       return;
     } else if (height[rootA] < height[rootB]) {
       parent[rootA] = rootB;
-      size[rootB] += size[rootA];
       return;
     }
 
     parent[rootA] = rootB;
-    size[rootB] += size[rootA];
     height[rootB]++;
   }
 
@@ -119,14 +99,16 @@ public class DoNotConnectWithASpecificNode {
     return parent[x] = findRoot(parent[x]);
   }
 
-  private static class Size {
+  private static class Edge {
 
-    int idx;
-    int size;
+    int fr;
+    int to;
+    int dist;
 
-    public Size(int idx, int size) {
-      this.idx = idx;
-      this.size = size;
+    public Edge(int fr, int to, int dist) {
+      this.fr = fr;
+      this.to = to;
+      this.dist = dist;
     }
   }
 }
