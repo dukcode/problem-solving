@@ -19,3 +19,8 @@
     - 현재의 정보를 이용하면 올라가야함.
 - [올바른 등식 만들기](https://www.codetree.ai/missions/2/problems/right-equality/description)
     - 베이스 케이스 처리 중요
+
+## 위상 정렬
+
+- [친구의 키 4](https://www.codetree.ai/missions/9/problems/height-of-friends-4/description)
+    - 어디서 모순이 생겼는지 파라메트릭 서치를 통해 확인
