@@ -24,3 +24,5 @@
 
 - [친구의 키 4](https://www.codetree.ai/missions/9/problems/height-of-friends-4/description)
     - 어디서 모순이 생겼는지 파라메트릭 서치를 통해 확인
+- [새로 번호 매기기](https://www.codetree.ai/missions/9/problems/renumbering-process/description)
+    - 매핑이 사전순이 되려면 거꾸로 간선을 거꾸로 뒤집고 최대값부터 해야함
