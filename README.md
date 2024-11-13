@@ -26,3 +26,9 @@
     - 어디서 모순이 생겼는지 파라메트릭 서치를 통해 확인
 - [새로 번호 매기기](https://www.codetree.ai/missions/9/problems/renumbering-process/description)
     - 매핑이 사전순이 되려면 거꾸로 간선을 거꾸로 뒤집고 최대값부터 해야함
+- [최대로 방문 가능한 경로](https://www.codetree.ai/missions/9/problems/maximum-visitable-route/description)
+    - 사전순으로 앞선 경로를 하려면 역방향으로 해야한다.
+    - 1 - 5 - 2 - 6
+    - 1 - 3 - 4 - 6
+    - 위의 경우에 6의 before값을 보고 업데이트하면 그앞의 차이를 구분할 수 없음
+    - 최종 값이 작은걸로 판단하려면 경로를 거꾸로 타야함.
