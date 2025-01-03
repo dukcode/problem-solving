@@ -1,4 +1,4 @@
-package com.dukcode.solvedac.class_02;
+package com.dukcode.solvedac.class_03;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
